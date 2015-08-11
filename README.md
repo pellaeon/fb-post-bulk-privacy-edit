@@ -14,11 +14,12 @@ Facebook Graph API does not offer a way to modify post privacy settings, so my s
 
 This script first uses Graph API to grab all post ID's from a specific timeframe, then emulate browser requests to each of them.
 
-However, I found that the wacky [Graph API /<user_id>/posts endpoint does not actually show all posts](https://stackoverflow.com/questions/7659701/facebook-graph-api-json-missing-posts), so there needs to be another way to grab all post IDs.
+However, I found that the wacky [Graph API /user_id/posts endpoint does not actually show all posts](https://stackoverflow.com/questions/7659701/facebook-graph-api-json-missing-posts), so there needs to be another way to grab all post IDs.
 
 ## process_from_ids.py
 
 One way to grab all post IDs is:
+
 1. Open your profile page on a browser
 2. Find something small and heavy to keep your `End` key (`Fn+Down` for Mac) pressed down
 3. Go to lunch
@@ -32,3 +33,7 @@ One way to grab all post IDs is:
 Then, `process_from_ids.py` can read post IDs from that file and modify privacy settings for them.
 
 _Note: maybe later I can use Casperjs to grab the post IDs, maybe even get cookie by emulating login on Casperjs_
+
+## License
+
+AGPLv3
