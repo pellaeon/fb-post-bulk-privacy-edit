@@ -9,6 +9,8 @@ INTERVAL=86400
 TOKEN=''
 USER_ID=''
 privacy_setting='286958161406148' # only me
+BODY=''
+COOKIE=''
 
 for cur_since in range(SINCE, UNTIL, INTERVAL):
     print "Starting from "+str(cur_since)
@@ -23,9 +25,9 @@ for cur_since in range(SINCE, UNTIL, INTERVAL):
 
     for dd in d['data']:
         post_id = string.split(dd['id'], '_')[1]
-        body = ''
+        body = BODY
         header = {
-                "cookie": "",
+                "cookie": COOKIE,
                 "Content-type": "application/x-www-form-urlencoded"
                 }
         conn2 = HTTPSConnection("www.facebook.com")
