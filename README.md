@@ -16,6 +16,12 @@ This script first uses Graph API to grab all post ID's from a specific timeframe
 
 However, I found that the wacky [Graph API /user_id/posts endpoint does not actually show all posts](https://stackoverflow.com/questions/7659701/facebook-graph-api-json-missing-posts), so there needs to be another way to grab all post IDs.
 
+### Parameters:
+`TOKEN`: a valid Facebook OAuth client token that is authorized to read your own timeline, you can go to [Facebook Graph API Explorer](https://developers.facebook.com/tools/explorer), authorize it, and copy its token here.
+`privacy_setting`: target privacy setting you wish to set. You can use `286958161406148` for "Only me". To use other values, open your browser developer console's network tab, then change privacy setting to what you want (Friends, Public, Custom list, etc) for an arbitrary post, monitor the dev console for xhr POST request to `/privacy/selector/update/`, inside the request HTTP query strings, `post_param` is the id for that privacy setting. Set this `privacy_setting` to the privacy setting id you want to use.
+`BODY`: also from the request intercepted above, copy the request body here. It usually starts with `__user=....`.
+`COOKIE`: steal cookies also from that intercepted request, you can find it in `cookie` request header.
+
 ## process_from_ids.py
 
 One way to grab all post IDs is:
