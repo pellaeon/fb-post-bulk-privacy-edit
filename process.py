@@ -28,7 +28,8 @@ for cur_since in range(SINCE, UNTIL, INTERVAL):
         body = BODY
         header = {
                 "cookie": COOKIE,
-                "Content-type": "application/x-www-form-urlencoded"
+                "Content-type": "application/x-www-form-urlencoded",
+                "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"
                 }
         conn2 = HTTPSConnection("www.facebook.com")
         conn2.request("POST", "/privacy/selector/update/?privacy_fbid="+post_id+
