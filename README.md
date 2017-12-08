@@ -1,14 +1,29 @@
 ## Introduction
 
-**Warning: this is a super hacky proof of concept project that contains a lot of dirty and badly written code, but hey, it works for me.**
-
 Facebook has a tool in settings page, it can bulk modify post privacy settings for old posts, the tool is called "Limit old posts".
 
 However, the tool can only modify posts that are shared with "Public" or "Friends of friends". So my script attempts to solve this problem.
 
+**Warning: this is a super hacky proof of concept project that contains a lot of dirty and badly written code, but hey, it works for me.**
+
 ## How it works
 
 Facebook Graph API does not offer a way to modify post privacy settings, so my script needs you to steal cookies from a logged in browser, and send resuests emulating the browser to modify post privacy settings.
+
+## How do I use it? (for people not familiar with commandline operations)
+
+1. You need to have Python 2 on your computer, modern MacOS and many Linux distributions have it.
+2. Download the code from Github, unzip, open a terminal, navigate to the unzipped folder by typing `cd`, space, then drag the unzipped folder onto the terminal window.
+3. You need to obtain a few parameters, open your browser and log in to facebook, navigate to the [API Explorer](https://developers.facebook.com/tools/explorer), click "Obtain Token", then "Obtain User Access Token", check `user_posts`, click "Obtain Access Token", copy the text in the field "Access Token", it usually starts with `EAACE....`, this is the `TOKEN` parameter, save it somewhere.
+4. Switch back to the browser, open [your facebook profile page](https://www.facebook.com/me), [open developer tools](https://developer.chrome.com/devtools#access), switch to the "Network" tab, input `/privacy/selector/update/` into the filter field.
+5. Open any of your facebook post, change its privacy settings to anything, and switch it back, a few entries should appear on in the "Network" tab.
+6. Click any entry starting with `?privacy_fbid`, a panel will open to the right, scroll down and find the "Request Headers" section, in the section find the `cookie:` field, copy all the text, this is the `COOKIE` parameter, save it somewhere.
+7. Scroll down further to the "Form Data" section, click "view source", copy all the text, this is the `BODY` parameter, save it somewhere.
+8. [Find your facebook ID](https://findmyfbid.com/), it should be a long number, this is the `USER_ID` parameter.
+9. Open `process.py` using a text editor, fill in the parameters you have saved: `TOKEN`, `USER_ID`, `BODY`, `COOKIE`, **always put your text within single quotes**, for example `USER_ID='10000012345678'`
+10. Edit the date numbers in which your posts' privacy settings will be edited, using the `SINCE` and `UNTIL` parameter, for example: `SINCE=calendar.timegm(date(2011,8,1).timetuple())` this would mean to modify all posts **since** 2011/8/1.
+11. In the text editor, save `process.py`.
+12. Switch to the terminal window that you opened in step 2, type in `python process.py`, hit enter, and the script will start to run, if you see something like `Setting 64123317123111234 result code=200`, the script is running successfully. (result code 200 mean success, otherwise failure). You can hit Ctrl+C to stop the script any time.
 
 ## process.py
 
