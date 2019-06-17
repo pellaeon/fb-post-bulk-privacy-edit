@@ -1,0 +1,5 @@
+#A quick way to get a long-lived Facebook user access token.
+#https://developers.facebook.com/docs/graph-api/using-graph-api/common-scenarios This page describes how to get a long-lived user access token.
+#both the fb_exchange_token and the access_token parameters are the same value: the short-lived user access token.
+
+curl -i -X GET "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id={appid}&client_secret={appsecret}&fb_exchange_token={short-lived user access token}&access_token={short-lived user access token}
